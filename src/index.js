@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-// 1.6: unicafe step1
-// Like most companies, Unicafe collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: good, neutral, and bad.
-
-// The application must display the total number of collected feedback for each category.
+// 1.7: unicafe step2
+// Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
 
 const App = () => {
   // save clicks of each button to own state
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+
+  const calcPos = () => {
+    let formula = good / (good + bad + neutral);
+    if (!isNaN(formula)) {
+      return good / (good + bad + neutral);
+    } else {
+      return 0;
+    }
+  };
 
   return (
     <div>
@@ -41,6 +48,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {good + bad + neutral}</p>
+      <p>average {((good + bad + neutral) / 3).toFixed(2)}</p>
+      <p>positive {calcPos().toFixed(2)}%</p>
     </div>
   );
 };
