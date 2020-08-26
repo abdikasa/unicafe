@@ -38,8 +38,8 @@ const Statistics = ({ good, neutral, bad }) => {
       <Statistic text="neutral" value={neutral} />
       <Statistic text="bad" value={bad} />
       <Statistic text="all" value={sum} />
-      <Statistic text="avg" value={avg} />
-      <Statistic text="pos" value={positive} />
+      <Statistic text="avg" value={avg.toFixed(2)} />
+      <Statistic text="pos" value={positive.toFixed(2) + "%"} />
     </div>
   );
 };
