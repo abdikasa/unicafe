@@ -8,9 +8,10 @@ import "./index.css";
 const Statistic = ({ text, value }) => {
   return (
     <>
-      <p>
-        {text} {value}
-      </p>
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
     </>
   );
 };
@@ -34,12 +35,18 @@ const Statistics = ({ good, neutral, bad }) => {
 
   return (
     <div>
-      <Statistic text="good" value={good} />
-      <Statistic text="neutral" value={neutral} />
-      <Statistic text="bad" value={bad} />
-      <Statistic text="all" value={sum} />
-      <Statistic text="avg" value={avg.toFixed(2)} />
-      <Statistic text="pos" value={positive.toFixed(2) + "%"} />
+      <table>
+        <tbody>
+          <Statistic text="good" value={good} />
+          <Statistic text="neutral" value={neutral} />
+          <Statistic text="bad" value={bad} />
+        </tbody>
+        <tfoot>
+          <Statistic text="all" value={sum} />
+          <Statistic text="avg" value={avg.toFixed(2)} />
+          <Statistic text="pos" value={positive.toFixed(2) + "%"} />
+        </tfoot>
+      </table>
     </div>
   );
 };
