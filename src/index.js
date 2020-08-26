@@ -2,34 +2,45 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-// 1.9: unicafe step4
-// Change your application to display statistics only once feedback has been gathered.
+// 1.10: unicafe step5
+// Let's continue refactoring the application. Extract the following two components:
 
-const Statistics = (prop) => {
-  const sum = prop.g + prop.n + prop.b;
-  const avg = sum / 3;
-  const pos = prop.g / sum;
-  const checkIfZero = (formula) => {
-    if (!isNaN(formula) && formula !== 0) {
-      if (formula == pos) {
-        return formula.toFixed(2) + "%";
-      }
-      return formula.toFixed(2);
-    } else {
-      return "No feedback given";
-    }
-  };
+// Button for defining the buttons used for submitting feedback
+// Statistic for displaying a single statistic, e.g. the average score.
+// To be clear: the Statistic component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics:
 
+const Statistic = ({ text, value }) => {
   return (
     <>
-      <h2>Statistics</h2>
-      <p>good {prop.g}</p>
-      <p>neutral {prop.n}</p>
-      <p>bad {prop.b}</p>
-      <p>all {checkIfZero(sum)}</p>
-      <p>average {checkIfZero(avg)}</p>
-      <p>positive {checkIfZero(pos)}</p>
+      <p>
+        {text} {value}
+      </p>
     </>
+  );
+};
+
+const Statistics = ({ good, neutral, bad }) => {
+  let sum = good + neutral + bad;
+  let avg = sum / 3;
+  let positive = good / sum;
+
+  if (sum === 0) {
+    return (
+      <>
+        <p>No feedback given</p>
+      </>
+    );
+  }
+
+  return (
+    <div>
+      <Statistic text="good" value={good} />
+      <Statistic text="neutral" value={neutral} />
+      <Statistic text="bad" value={bad} />
+      <Statistic text="all" value={sum} />
+      <Statistic text="avg" value={avg} />
+      <Statistic text="pos" value={positive} />
+    </div>
   );
 };
 
@@ -63,7 +74,7 @@ const App = () => {
       >
         bad
       </button>
-      <Statistics g={good} b={bad} n={neutral}></Statistics>
+      <Statistics good={good} bad={bad} neutral={neutral}></Statistics>
     </div>
   );
 };
