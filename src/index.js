@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-// 1.8: unicafe step3
-// Refactor your application so that displaying the statistics is extracted into its own Statistics component. The state of the application should remain in the App root component.
+// 1.9: unicafe step4
+// Change your application to display statistics only once feedback has been gathered.
 
 const Statistics = (prop) => {
   const sum = prop.g + prop.n + prop.b;
   const avg = sum / 3;
-  const pos = () => {
-    const formula = prop.g / sum;
-    if (!isNaN(formula)) {
-      return prop.g / (prop.g + prop.b + prop.n);
+  const pos = prop.g / sum;
+  const checkIfZero = (formula) => {
+    if (!isNaN(formula) && formula !== 0) {
+      if (formula == pos) {
+        return formula.toFixed(2) + "%";
+      }
+      return formula.toFixed(2);
     } else {
-      return 0;
+      return "No feedback given";
     }
   };
 
@@ -23,9 +26,9 @@ const Statistics = (prop) => {
       <p>good {prop.g}</p>
       <p>neutral {prop.n}</p>
       <p>bad {prop.b}</p>
-      <p>all {sum}</p>
-      <p>average {avg.toFixed(2)}</p>
-      <p>positive {pos().toFixed(2)}%</p>
+      <p>all {checkIfZero(sum)}</p>
+      <p>average {checkIfZero(avg)}</p>
+      <p>positive {checkIfZero(pos)}</p>
     </>
   );
 };
