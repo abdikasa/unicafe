@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 
-// 1.10: unicafe step5
-// Let's continue refactoring the application. Extract the following two components:
-
-// Button for defining the buttons used for submitting feedback
-// Statistic for displaying a single statistic, e.g. the average score.
-// To be clear: the Statistic component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics:
+// 1.11: unicafe step6
+// Display the statistics in an HTML table
 
 const Statistic = ({ text, value }) => {
   return (
